@@ -5,7 +5,7 @@ import parse from "html-react-parser";
 const HoldingCard = ({ img, bgColor, text }) => {
   return (
     <div className="mt-4">
-      <div className={`lg:w-[400px] h-[151px] ${bgColor} rounded-lg flex`}>
+      <div className={`max-w-[400px]  h-[151px] ${bgColor} rounded-lg flex`}>
         <div className="p-3">
           <img
             className="w-32 h-32 rounded-xl object-right object-cover"
@@ -85,7 +85,7 @@ function About() {
             Already Holding {coinData.name}?
           </div>
           <div className="lg:flex border-b-2 border-[#C9CFDD]/40 pb-4">
-            <div className=" gap-4 flex flex-col md:flex-row lg:ml-8">
+            <div className=" gap-4 ml-4 flex flex-col md:flex-row flex-wrap ">
               <HoldingCard
                 img="https://s3-alpha-sig.figma.com/img/4a59/7cf5/e39cee97d83ba894aa0c105133924b9b?Expires=1737331200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=BIpcdewbeHvpF0MrAHY9Lvoj0pca~n77kDxgd55mI~LL6DhUVkQkiHr5pBEMM7AtTgJ3r50AD5rDtCXdoDGT56v03G1oM0r4wyjQQsqlRn7plrafv4xMISOsNszaNThUXSJrUlWt~XLXr7r86YIkB5PwI3lVDyklbGy~48E2qc86bk25uWBfyp2yk-BGZORYlvmG4DNJRnQ8qtcIJ8nj1kxPzIKT4O676Cdkfd09WRDGFQLhBevRjdipHN7UW6y1LZz651u9k7qWHX-nCLWNBhpwzx4i0aH4FddzREaKCwnmK~DAkruz1qAfUnsFZLCClIobUtEFP58DdJkB8Iyc1A__"
                 bgColor="bg-gradient-to-br from-[#79F1A4] to-[#0E5CAD]"
