@@ -24,7 +24,7 @@ export default function TrendingCard() {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className="flex flex-col items-start justify-center rounded-lg gap-4 bg-white p-4 text-black">
+    <div className="flex flex-col items-start justify-center rounded-lg gap-2 bg-white p-4 text-black">
       <h1 className="font-bold text-center text-xl">
         Trending Cryptocurrencies
       </h1>
@@ -37,7 +37,7 @@ export default function TrendingCard() {
           <img
             src={coin.item.small}
             alt={coin.item.name}
-            className="w-10 h-10 rounded-full"
+            className="w-8 h-8 rounded-full"
           />
           <p className="font-sm text-sm ">
             {coin.item.name} ({coin.item.symbol})
