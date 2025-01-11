@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import TradingViewWidget from "./widget";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
-import useCoinStore from "../util/coinStore";
+import useCoinStore from "../util/store";
 
 function Crypto() {
     const { coinData, setCoinData} = useCoinStore();

@@ -13,3 +13,15 @@ const useCoinStore = create(
 );
 
 export default useCoinStore;
+
+const useTrendingCoinStore = create(
+  persist(
+    (set) => ({
+      trending: [],
+      setTrending: (data) => set({ trending: data })
+    }),
+    { name: 'trending-coin-store' }
+  )
+);
+
+export { useTrendingCoinStore };

@@ -1,5 +1,5 @@
 import { FaArrowRight } from "react-icons/fa";
-import useCoinStore from "../util/coinStore";
+import useCoinStore from "../util/store";
 import parse from "html-react-parser";
 
 const HoldingCard = ({ img, bgColor, text }) => {

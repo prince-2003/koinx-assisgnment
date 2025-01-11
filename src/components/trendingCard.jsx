@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { TiArrowSortedUp, TiArrowSortedDown } from "react-icons/ti";
+import { useTrendingCoinStore } from "../util/store";
 
 export default function TrendingCard() {
-  const [trending, setTrending] = useState([]);
+  const { trending, setTrending } = useTrendingCoinStore();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -11,7 +12,7 @@ export default function TrendingCard() {
     axios
       .get("https://api.coingecko.com/api/v3/search/trending")
       .then((response) => {
-        setTrending(response.data.coins.slice(0, 3));
+        setTrending(response.data.coins);
         setLoading(false);
       })
       .catch((error) => {
@@ -28,7 +29,7 @@ export default function TrendingCard() {
       <h1 className="font-bold text-center text-xl">
         Trending Cryptocurrencies
       </h1>
-      {trending.map((coin) => (
+      {trending.slice(0, 3).map((coin) => (
         <div
           key={coin.item.id}
           className="flex items-center justify-between w-full gap-4 p-2 "

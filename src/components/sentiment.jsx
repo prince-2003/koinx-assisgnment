@@ -3,7 +3,78 @@ import { IoMdInformationCircle } from "react-icons/io";
 import { FaRegNewspaper } from "react-icons/fa";
 import Card from "./sentimentCard";
 import { FaArrowTrendUp } from "react-icons/fa6";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
+const customStyles = `
+  .react-multi-carousel-list {
+   position: static ;
+   padding: 45px 0px;
+   
+  }
+`;
+const responsive = {
+  superLargeDesktop: {
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5,
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 4,
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2,
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+  },
+};
+
+const CustomRightArrow = ({ onClick }) => (
+  <button
+    onClick={onClick}
+    className="absolute right-[-10px] top-1/2  bg-white p-3 rounded-full shadow-lg hover:bg-gray-100 transition-all duration-300 z-20"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-6 w-6 text-black"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M9 5l7 7-7 7"
+      />
+    </svg>
+  </button>
+);
+
+const CustomLeftArrow = ({ onClick }) => (
+  <button
+    onClick={onClick}
+    className="absolute left-[-10px] top-1/2  bg-white p-3 rounded-full shadow-lg hover:bg-gray-100 transition-all duration-300 z-10"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-6 w-6 text-black"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M15 19l-7-7 7-7"
+      />
+    </svg>
+  </button>
+);
 
 function SentimentSection() {
   return (
@@ -16,11 +87,20 @@ function SentimentSection() {
             <IoMdInformationCircle className="text-[#ABB9BF] text-lg ml-2" />
           </div>
         </div>
-        <div className="flex overflow-x-scroll gap-10">
-          <Card icon={FaRegNewspaper} bgColor="#0082FF"/>
-          <Card icon={FaArrowTrendUp} bgColor="#0FBA83"/>
+        <div className="relative w-auto">
+          <style>{customStyles}</style>
+          <Carousel
+            responsive={responsive}
+            infinite={true}
+            customRightArrow={<CustomRightArrow />}
+            customLeftArrow={<CustomLeftArrow />}
+          >
+            <Card icon={FaRegNewspaper} bgColor="#0082FF" />
+            <Card icon={FaArrowTrendUp} bgColor="#0FBA83" />
+            <Card icon={FaRegNewspaper} bgColor="#0082FF" />
+            <Card icon={FaArrowTrendUp} bgColor="#0FBA83" />
+          </Carousel>
         </div>
-       
 
         <div className="mb-6">
           <div className="flex items-center py-4 mt-6">

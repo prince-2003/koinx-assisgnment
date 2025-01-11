@@ -10,7 +10,9 @@ import TeamCard from "./team";
 
 function Hero() {
   return (
-    <div className="px-4 md:px-14 py-4">
+  
+  
+    <div className="px-4 md:px-14 py-4 bg-[#eff2f5] ">
       
       <div className="flex gap-2 items-center text-gray-800">
         <h3 className="font-medium">CryptoCurrencies</h3>

@@ -1,5 +1,5 @@
 import { IoMdInformationCircle } from "react-icons/io";
-import useCoinStore from "../util/coinStore";
+import useCoinStore from "../util/store";
 
 function formatDateWithRelativeTime(isoDate) {
     const date = new Date(isoDate);
