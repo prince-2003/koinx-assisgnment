@@ -6,6 +6,7 @@ import PerformanceSection from "./performance";
 import SentimentSection from "./sentiment";
 import About from "./about";
 import Tokenomics from "./tokenomics";
+import TeamCard from "./team";
 
 function Hero() {
   return (
@@ -25,6 +26,7 @@ function Hero() {
           <SentimentSection />
           <About />
           <Tokenomics />
+          <TeamCard />
         </div>
 
         <div className="hidden md:block md:flex-[1/4] h-full sticky top-[12%] px-4 space-y-4">
