@@ -29,21 +29,26 @@ export default function TrendingCard() {
         Trending Cryptocurrencies
       </h1>
       {trending.map((coin) => (
-        <div key={coin.item.id} className="flex items-center gap-4">
+        <div
+          key={coin.item.id}
+          className="flex items-center justify-between w-full gap-4 p-2 "
+        >
+          <div className="flex items-center gap-2">
           <img
             src={coin.item.small}
             alt={coin.item.name}
             className="w-10 h-10 rounded-full"
           />
-          <p className="font-sm">
+          <p className="font-sm text-sm ">
             {coin.item.name} ({coin.item.symbol})
           </p>
+          </div>
           {coin.item.data.price_change_percentage_24h.usd && (
             <p
               className={`font-medium flex items-center ${
                 coin.item.data.price_change_percentage_24h.usd >= 0
-                  ? "text-green-500"
-                  : "text-red-500"
+                  ? "text-green-500 bg-[#EBF9F4] rounded p-1"
+                  : "text-red-500 bg-[#f9ebeb] rounded p-1"
               }`}
             >
               {coin.item.data.price_change_percentage_24h.usd >= 0 ? (
@@ -51,7 +56,10 @@ export default function TrendingCard() {
               ) : (
                 <TiArrowSortedDown />
               )}
-              {coin.item.data.price_change_percentage_24h.usd.toFixed(2)}%
+              {Math.abs(coin.item.data.price_change_percentage_24h.usd).toFixed(
+                2
+              )}
+              %
             </p>
           )}
         </div>

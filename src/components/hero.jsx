@@ -4,7 +4,7 @@ import TrendingCard from "./trendingCard";
 
 function Hero() {
   return (
-    <div className="px-14 py-4 h-full re">
+    <div className="px-14 py-4 h-screen">
       <div className="flex gap-2 items-center">
         <h3>CryptoCurrencies</h3>
         <MdKeyboardDoubleArrowRight />
@@ -19,7 +19,7 @@ function Hero() {
             <div className="h-[2000px]">Scroll to test scrolling behavior</div>
           </div>
         </div>
-        <div className=" basis-1/4 h-full sticky top-0 px-4">
+        <div className=" basis-1/4 h-full sticky top-0 px-4 space-y-4">
           <GettingStarted />
           <TrendingCard />
         </div>

@@ -6,7 +6,7 @@ import Navbar from "./components/navbar"
 function App() {
 
   return (
-      <div className="bg-[#eff2f5] min-h-screen">
+      <div className="bg-[#eff2f5] ">
       <Navbar />
       <Hero />
       </div>
