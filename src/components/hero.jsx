@@ -3,6 +3,7 @@ import GettingStarted from "./cardGetttingStarted";
 import TrendingCard from "./trendingCard";
 import Crypto from "./crypto";
 import PerformanceSection from "./performance";
+import SentimentSection from "./sentiment";
 
 function Hero() {
   return (
@@ -19,6 +20,7 @@ function Hero() {
         <div className=" flex-1 md:flex-[3/4] max-h-full overflow-auto ">
           <Crypto />
           <PerformanceSection />
+          <SentimentSection />
         </div>
 
         <div className="hidden md:block md:flex-[1/4] h-full sticky top-[12%] px-4 space-y-4">
