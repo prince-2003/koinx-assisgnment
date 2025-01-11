@@ -1,4 +1,4 @@
-import card from '../assets/Card.svg';
+import card from '../assets/card.svg';
 import Button from './button';
 import { IoMdArrowRoundForward } from 'react-icons/io';
 
