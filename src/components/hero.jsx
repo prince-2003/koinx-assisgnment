@@ -4,6 +4,7 @@ import TrendingCard from "./trendingCard";
 import Crypto from "./crypto";
 import PerformanceSection from "./performance";
 import SentimentSection from "./sentiment";
+import About from "./about";
 
 function Hero() {
   return (
@@ -21,6 +22,7 @@ function Hero() {
           <Crypto />
           <PerformanceSection />
           <SentimentSection />
+          <About />
         </div>
 
         <div className="hidden md:block md:flex-[1/4] h-full sticky top-[12%] px-4 space-y-4">
