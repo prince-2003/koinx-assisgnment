@@ -2,42 +2,36 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import TradingViewWidget from "./widget";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
+import useCoinStore from "../util/coinStore";
 
 function Crypto() {
-  const [cryptoData, setCryptoData] = useState(null);
-  const [coinData, setCoinData] = useState(null);
+    const { coinData, setCoinData} = useCoinStore();
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchCoinData = async () => {
-      try {
-        const response = await axios.get("https://api.coingecko.com/api/v3/coins/bitcoin");
-        setCoinData(response.data);
-      } catch (err) {
-        setError(err.message || "Failed to fetch coin data");
-      }
-    };
+ 
+    useEffect(() => {
+        const fetchCoinData = async () => {
+          try {
+            if (!coinData) {
+              const response = await axios.get("https://api.coingecko.com/api/v3/coins/bitcoin", {
+                headers: { accept: 'application/json' }
+              });
+              setCoinData(response.data);
+            }
+          } catch (err) {
+            setError(err.message || "Failed to fetch coin data");
+          }
+        };
 
-    const fetchCryptoData = async () => {
-      try {
-        const response = await axios.get(
-          "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=inr%2Cusd&include_24hr_change=true"
-        );
-        setCryptoData(response.data.bitcoin);
-      } catch (err) {
-        setError(err.message || "Failed to fetch price data");
-      }
-    };
-
+    
     fetchCoinData();
-    fetchCryptoData();
+    
 
-    const intervalId = setInterval(fetchCryptoData, 10000);
+    const intervalId = setInterval(fetchCoinData, 60000); 
     return () => clearInterval(intervalId);
-  }, []);
+  }, [coinData, setCoinData]);
 
-  
-  if (!coinData || !cryptoData) {
+  if (!coinData) {
     return (
       <div className="bg-white h-max rounded-lg p-6">
         <div className="flex items-center">
@@ -98,19 +92,19 @@ function Crypto() {
 
       <div className="mt-8 flex">
         <div>
-          <div className="text-3xl font-semibold text-[#0B1426]">${cryptoData.usd}</div>
-          <div className="text-lg font-medium text-[#0B1426]">₹ {cryptoData.inr}</div>
+          <div className="text-3xl font-semibold text-[#0B1426]">${coinData.market_data.current_price.usd}</div>
+          <div className="text-lg font-medium text-[#0B1426]">₹ {coinData.market_data.current_price.inr}</div>
         </div>
 
         <div
           className={`flex items-center justify-center rounded-lg p-2 h-10 ml-10 ${
-            cryptoData.inr_24h_change > 0
+            coinData.market_data.price_change_percentage_24h_in_currency.inr > 0
               ? "text-green-500 bg-[#EBF9F4] rounded p-1"
               : "text-red-500 bg-[#f9ebeb] rounded p-1"
           }`}
         >
-          {cryptoData.inr_24h_change > 0 ? <TiArrowSortedUp /> : <TiArrowSortedDown />}
-          {Math.abs(cryptoData.inr_24h_change).toFixed(2)}%
+          {coinData.market_data.price_change_percentage_24h_in_currency.inr > 0? <TiArrowSortedUp /> : <TiArrowSortedDown />}
+          {Math.abs(coinData.market_data.price_change_percentage_24h_in_currency.inr).toFixed(2)}%
         </div>
 
         <div className="text-sm text-[#768396] ml-2 mt-2">(24H)</div>
