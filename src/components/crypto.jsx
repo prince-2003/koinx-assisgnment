@@ -10,7 +10,7 @@ function Crypto() {
 
   if (!coinData) {
     return (
-      <div className="bg-white h-max rounded-lg p-6" key={Id}>
+      <div className="bg-white h-max rounded-lg p-6">
         <div className="flex items-center">
           <div>
             <div className="w-9 h-9 bg-gray-200 rounded-full animate-pulse"></div>
