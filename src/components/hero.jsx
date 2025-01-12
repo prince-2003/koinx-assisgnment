@@ -16,7 +16,6 @@ function Hero() {
   const {id} = useParams();
   const { coinData, setCoinData} = useCoinStore();
   const [error, setError] = useState(null);
-  console.log(id)
   let Id = id || "bitcoin";
 
   useEffect(() => {
@@ -32,6 +31,7 @@ function Hero() {
           window.scrollTo(0, 0);
         }
       } catch (err) {
+
         setError(err.message || "Failed to fetch coin data");
       }
     };
