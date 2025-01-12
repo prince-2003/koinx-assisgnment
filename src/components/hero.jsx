@@ -8,9 +8,39 @@ import About from "./about";
 import Tokenomics from "./tokenomics";
 import TeamCard from "./team";
 import { useParams } from "react-router-dom";
+import useCoinStore from "../util/store";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function Hero() {
   const {id} = useParams();
+  const { coinData, setCoinData} = useCoinStore();
+  const [error, setError] = useState(null);
+  console.log(id)
+  let Id = id || "bitcoin";
+
+  useEffect(() => {
+    const fetchCoinData = async () => {
+      try {
+        
+        if (!coinData || coinData.id !== Id) {
+          const response = await axios.get(
+            `https://api.coingecko.com/api/v3/coins/${Id}`,
+            { headers: { accept: "application/json" } }
+          );
+          setCoinData(response.data);
+          window.scrollTo(0, 0);
+        }
+      } catch (err) {
+        setError(err.message || "Failed to fetch coin data");
+      }
+    };
+
+    fetchCoinData();
+
+    const intervalId = setInterval(fetchCoinData, 60000); 
+    return () => clearInterval(intervalId);
+  }, [Id, coinData, setCoinData]);
   return (
   
   
@@ -19,7 +49,7 @@ function Hero() {
       <div className="flex gap-2 items-center text-gray-800">
         <h3 className="font-medium">CryptoCurrencies</h3>
         <MdKeyboardDoubleArrowRight aria-label="Breadcrumb navigation" />
-        <h3 className="font-medium">{id}</h3>
+        <h3 className="font-medium">{Id}</h3>
       </div>
 
       <div className="flex gap-2 h-full mt-4 relative">

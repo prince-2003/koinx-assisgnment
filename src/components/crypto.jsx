@@ -1,41 +1,12 @@
-import { useState, useEffect, } from "react";
-import axios from "axios";
+
 import TradingViewWidget from "./widget";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 import useCoinStore from "../util/store";
-import { useParams } from "react-router-dom";
+
 
 
 function Crypto() {
-    const { coinData, setCoinData} = useCoinStore();
-  const [error, setError] = useState(null);
-  const {id} = useParams();
-  console.log(id)
-  let Id = id || "bitcoin";
-
-
- 
-  useEffect(() => {
-    const fetchCoinData = async () => {
-      try {
-        
-        if (!coinData || coinData.id !== Id) {
-          const response = await axios.get(
-            `https://api.coingecko.com/api/v3/coins/${Id}`,
-            { headers: { accept: "application/json" } }
-          );
-          setCoinData(response.data);
-        }
-      } catch (err) {
-        setError(err.message || "Failed to fetch coin data");
-      }
-    };
-
-    fetchCoinData();
-
-    const intervalId = setInterval(fetchCoinData, 60000); 
-    return () => clearInterval(intervalId);
-  }, [Id, coinData, setCoinData]);
+    const { coinData} = useCoinStore();
 
   if (!coinData) {
     return (
