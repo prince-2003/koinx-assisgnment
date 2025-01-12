@@ -6,41 +6,7 @@ import axios from 'axios';
 
 function TradingViewWidget() {
   const container = useRef(null);
-  const {coinData} = useCoinStore();
-  const id = coinData?.id || "bitcoin";
   
-  const {ticker, setTicker} = useCoinTickerStore();
-  const [error, setError] = useState(null);
-  
-  
-  useEffect(() => {
-    const fetchCoinTicker = async () => {
-      try {
-        
-        if (!ticker){
-          const response = await axios.get(
-            `https://api.coingecko.com/api/v3/coins/${id}/tickers`,
-            { headers: { accept: "application/json" } }
-          );
-          setTicker(response.data);}
-          
-        
-      } catch (err) {
-        
-        setError(err.message || "Failed to fetch coin data");
-      }
-    };
-
-    fetchCoinTicker();
-    const intervalId = setInterval(fetchCoinTicker, 120000);
-    return () => clearInterval(intervalId);
-  }, [id]);
-
-  const usdTickers = ticker?.tickers?.filter((t) => t.target.toUpperCase() === "USD") || [];
-  const randomIndex = Math.floor(Math.random() * usdTickers.length);
-  const randomTicker = ticker.tickers[randomIndex];
-  const symbol = randomTicker.market.name.split(' ')[0].split(/[ .]/)[0].toUpperCase() + ":" + coinData.symbol.toUpperCase()+ randomTicker.target.toUpperCase();
-  console.log(symbol);
   
   useEffect(() => {
     if (container.current) {
