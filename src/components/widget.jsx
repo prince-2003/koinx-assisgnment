@@ -17,13 +17,12 @@ function TradingViewWidget() {
     const fetchCoinTicker = async () => {
       try {
         
-        console.log(`https://api.coingecko.com/api/v3/coins/${id}/tickers`);
+        if (!ticker){
           const response = await axios.get(
             `https://api.coingecko.com/api/v3/coins/${id}/tickers`,
             { headers: { accept: "application/json" } }
           );
-          setTicker(response.data);
-          console.log(response.data);
+          setTicker(response.data);}
           
         
       } catch (err) {
