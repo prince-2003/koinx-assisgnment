@@ -7,8 +7,10 @@ import SentimentSection from "./sentiment";
 import About from "./about";
 import Tokenomics from "./tokenomics";
 import TeamCard from "./team";
+import { useParams } from "react-router-dom";
 
 function Hero() {
+  const {id} = useParams();
   return (
   
   
@@ -17,7 +19,7 @@ function Hero() {
       <div className="flex gap-2 items-center text-gray-800">
         <h3 className="font-medium">CryptoCurrencies</h3>
         <MdKeyboardDoubleArrowRight aria-label="Breadcrumb navigation" />
-        <h3 className="font-medium">Bitcoin</h3>
+        <h3 className="font-medium">{id}</h3>
       </div>
 
       <div className="flex gap-2 h-full mt-4 relative">

@@ -1,6 +1,8 @@
 import Carousel from "react-multi-carousel";
 import { useTrendingCoinStore } from "../util/store";
 import "react-multi-carousel/lib/styles.css";
+import {  useNavigate, useParams } from "react-router-dom";
+
 
 const customStyles = `
   .react-multi-carousel-list {
@@ -74,16 +76,17 @@ const responsive = {
   );
  
 
-function Coin({ symbol, sparkline, img, changePercentage }) {
+function Coin({ id, symbol, sparkline, img, changePercentage }) {
   const isPositiveChange = parseFloat(changePercentage) >= 0;
+  const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col min-w-[80%] md:min-w-[300px] mr-4 items-center justify-between bg-gray-50 p-4 rounded-lg shadow-sm border hover:shadow-md transition-shadow">
+    <div className="flex flex-col min-w-[80%] md:min-w-[300px] mr-4 items-center justify-between bg-gray-50 p-4 rounded-lg shadow-sm border hover:shadow-md transition-shadow" onClick={()=> navigate(`/${id}`)}>
       <div className="flex items-center justify-between w-full mb-3">
         <div className="flex items-center gap-2">
           <img
             src={img}
-            className="w-8 h-8 rounded-full"
+            className="w-8 h-8 rounded-full pointer-events-none"
             alt={`${symbol} icon`}
           />
           <div className="text-lg font-semibold text-[#0F1629]">
@@ -102,7 +105,7 @@ function Coin({ symbol, sparkline, img, changePercentage }) {
       </div>
       <img
         src={sparkline}
-        className="w-full max-w-[80%] h-[90%] object-contain"
+        className="w-full max-w-[80%] h-[90%] object-contain pointer-events-none"
         alt={`${symbol} sparkline`}
       />
     </div>
@@ -111,6 +114,7 @@ function Coin({ symbol, sparkline, img, changePercentage }) {
 
 function TrendingCoins() {
   const { trending } = useTrendingCoinStore();
+  const {id} = useParams();
 
   if (!trending) {
     return (
@@ -140,6 +144,7 @@ function TrendingCoins() {
           return (
             <Coin
               key={index}
+              id={item.id}
               symbol={item.symbol}
               img={item.small}
               changePercentage={

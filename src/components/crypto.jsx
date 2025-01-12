@@ -1,39 +1,45 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, } from "react";
 import axios from "axios";
 import TradingViewWidget from "./widget";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 import useCoinStore from "../util/store";
+import { useParams } from "react-router-dom";
+
 
 function Crypto() {
     const { coinData, setCoinData} = useCoinStore();
   const [error, setError] = useState(null);
+  const {id} = useParams();
+  console.log(id)
+  let Id = id || "bitcoin";
+
 
  
-    useEffect(() => {
-        const fetchCoinData = async () => {
-          try {
-            if (!coinData) {
-              const response = await axios.get("https://api.coingecko.com/api/v3/coins/bitcoin", {
-                headers: { accept: 'application/json' }
-              });
-              setCoinData(response.data);
-            }
-          } catch (err) {
-            setError(err.message || "Failed to fetch coin data");
-          }
-        };
+  useEffect(() => {
+    const fetchCoinData = async () => {
+      try {
+        
+        if (!coinData || coinData.id !== Id) {
+          const response = await axios.get(
+            `https://api.coingecko.com/api/v3/coins/${Id}`,
+            { headers: { accept: "application/json" } }
+          );
+          setCoinData(response.data);
+        }
+      } catch (err) {
+        setError(err.message || "Failed to fetch coin data");
+      }
+    };
 
-    
     fetchCoinData();
-    
 
     const intervalId = setInterval(fetchCoinData, 60000); 
     return () => clearInterval(intervalId);
-  }, [coinData, setCoinData]);
+  }, [Id, coinData, setCoinData]);
 
   if (!coinData) {
     return (
-      <div className="bg-white h-max rounded-lg p-6">
+      <div className="bg-white h-max rounded-lg p-6" key={Id}>
         <div className="flex items-center">
           <div>
             <div className="w-9 h-9 bg-gray-200 rounded-full animate-pulse"></div>
