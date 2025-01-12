@@ -25,3 +25,15 @@ const useTrendingCoinStore = create(
 );
 
 export { useTrendingCoinStore };
+
+const useCoinTickerStore = create(
+  persist(
+    (set) => ({
+      ticker: null,
+      setTicker: (data) => set({ ticker: data })
+    }),
+    { name: 'coin-ticker-store' }
+  )
+);
+
+export { useCoinTickerStore };
